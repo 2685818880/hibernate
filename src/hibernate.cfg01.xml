@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+
+    <!-- session  connection -->
+	<session-factory>
+		
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+	    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+	    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mycart?useUnicode=true&amp;characterEncoding=utf-8</property>
+	    <property name="hibernate.connection.username">root</property>
+	    <property name="hibernate.connection.password">root</property>
+	   
+	   <!--配置SQLServer连接属性-->
+	   <!-- 微软的驱动有BUG，建议更换一个版本
+	   <property name ='dialect'>org.hibernate.dialect.SQLServerDialect</property>
+	   <property name ='connection.driver_class'>com.microsoft.jdbc.sqlserver.SQLServerDriver</property>
+	   <property name ='connection.url'>jdbc:sqlserver://localhost:1433;databaseName=mycart</property>
+       <property name="hibernate.connection.username">sa</property>
+	   <property name="hibernate.connection.password">sa</property>	   	         
+	    -->
+	   <!-- 在控制台显示SQL语句 -->
+	   <!-- 
+	   <property name="show_sqlserver">true</property>
+	    -->
+	     <!--根据需要自动生成，更新数据表 -->
+	   <!-- 
+	   <property name="hbm2ddl.auto">update</property>
+	   <property name="myeclipse.connection.profile">sqlserver</property>
+	    -->
+	   <!--注册所以ORM映射文件 -->
+	    <!-- 
+	    <mapping resource='com/xiaobiao/ch05/action/Customer.hbm.xml'/>
+	     -->
+		<property name="hbm2ddl.auto">update</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">false</property>
+		<!-- <property name="hibernate.connection.autocommit">true</property> -->
+		<!-- hibernate将session绑定到当前线程，事务结束后，hibernate
+将session从当前线程中释放，并且关闭session。当再次调用getCurrentSession
+()时，将得到一个新的session，并重新开始这一系列工作。 -->
+		<property name="hibernate.current_session_context_class">thread</property>
+
+		<mapping class="com.Bean.java.User"/>
+		<mapping class="com.Bean.java.Cart"/>
+		
+	</session-factory>
+
+</hibernate-configuration>
